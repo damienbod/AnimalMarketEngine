@@ -4,6 +4,7 @@ using AnimalMarketEngine.Model;
 
 namespace AnimalMarketEngine.Controllers
 {
+  [RoutePrefix("api")] 
     public class GameController : ApiController
     {
         private readonly IGameManager _gameManager;
@@ -13,6 +14,8 @@ namespace AnimalMarketEngine.Controllers
             _gameManager = gameManager;
         }
         // Test method
+        [Route("game")]
+        [AcceptVerbs("GET")]
         public Iteration Get()
         {
             return _gameManager.GetNextIteration();

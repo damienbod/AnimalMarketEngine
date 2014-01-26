@@ -11,22 +11,22 @@ namespace AnimalMarketService
         /// </summary>
         static void Main(string[] args)
         {
-            ServiceBase.Run(new AnimalMarketWindowsService());
+            //ServiceBase.Run(new AnimalMarketWindowsService());
 
-            //if (args != null)
-            //{
-            //    try
-            //    {
-            //        Startup.StartServer();
-            //        Console.WriteLine("Started...");
+            if (args != null)
+            {
+                try
+                {
+                    Startup.StartServer();
+                    Console.WriteLine("Started...");
 
-            //        Console.ReadKey();
-            //    }
-            //    finally
-            //    {
-            //        Startup.StopServer();
-            //    }
-            //}
+                    Console.ReadKey();
+                }
+                finally
+                {
+                    Startup.StopServer();
+                }
+            }
         }
     }
 }
