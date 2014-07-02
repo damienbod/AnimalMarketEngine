@@ -41,7 +41,7 @@ namespace Unity.SelfHostWebApiOwin
 
         public static void RegisterTypes(IUnityContainer container)
         {
-		    // Add your register logic here...
+            // Add your register logic here...
             var myAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.StartsWith("AnimalMarketEngine")).ToArray();
 
             container.RegisterType(typeof(Startup));
@@ -57,7 +57,6 @@ namespace Unity.SelfHostWebApiOwin
                         WithMappings.FromMatchingInterface,
                         WithName.Default,
                         WithLifetime.Transient);
-
         }
 
     }

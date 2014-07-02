@@ -1,4 +1,4 @@
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 using System.Web.Http;
 using Microsoft.Owin.Hosting;
@@ -14,18 +14,25 @@ namespace Unity.SelfHostWebApiOwin
     public class Startup
     {
         private static readonly IUnityContainer _container = UnityHelpers.GetConfiguredContainer();
-        private static IDisposable webApplication;
+
         // Your startup logic
         public static void StartServer()
         {
-            string baseAddress = "http://localhost:8089/";
+            string baseAddress = "http://localhost:8081/";
             var startup = _container.Resolve<Startup>();
-            webApplication = WebApp.Start(baseAddress, startup.Configuration);
-        }
+             //options.ServerFactory = "Microsoft.Owin.Host.HttpListener"
+            IDisposable webApplication = WebApp.Start(baseAddress, startup.Configuration);
 
-        public static void StopServer()
-        {
-            webApplication.Dispose();
+            try
+            {
+                Console.WriteLine("Started...");
+
+                Console.ReadKey();
+            }
+            finally
+            {
+                webApplication.Dispose();
+            }
         }
 
         // This code configures Web API. The Startup class is specified as a type
@@ -35,10 +42,10 @@ namespace Unity.SelfHostWebApiOwin
             // Configure Web API for self-host. 
             var config = new HttpConfiguration();
 
-            // Add Unity DependencyResolver
+			// Add Unity DependencyResolver
             config.DependencyResolver = new UnityDependencyResolver(UnityHelpers.GetConfiguredContainer());
 
-            // Add Unity filters provider
+			// Add Unity filters provider
             RegisterFilterProviders(config);
 
             //config.Routes.MapHttpRoute(
